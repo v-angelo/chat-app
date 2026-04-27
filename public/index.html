@@ -6,8 +6,11 @@
     <title>Chat App</title>
     <!-- css -->
     <link rel="stylesheet" href="style.css" />
-    <!-- tailwind cdn -->
-    <!-- <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script> -->
+    <!-- fonts -->
+    <link
+      href="https://fonts.googleapis.com/css2?family=Orbitron&display=swap"
+      rel="stylesheet"
+    />
     <!-- socket.io cdn -->
     <script
       src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.8.1/socket.io.min.js"
@@ -20,6 +23,17 @@
   </head>
   <body>
     <main>
+      <!-- theme selector -->
+      <header>
+        <h3>Select Theme</h3>
+        <select class="theme-selector" onchange="setTheme(this.value)">
+          <option value="">WhatsApp</option>
+          <option value="cyberpunk">Cyberpunk</option>
+          <option value="discord">Discord</option>
+          <option value="amoled">AMOLED</option>
+        </select>
+      </header>
+
       <!-- form when somebody joins a chat room -->
       <form class="form-join">
         <input

@@ -58,13 +58,19 @@ socket.on("message", (data) => {
   }
 
   if (name !== "Admin") {
-    li.innerHTML = `<div class="post__header ${name === nameInput.value ? "post__header--user" : "post__header--reply"}">
-    <span class="post__header--name">${name}</span>
-    <span class="post__header--time">${time}</span>
-    </div>
+    li.innerHTML = `
+          <div class="post__header ${name === nameInput.value ? "post__header--user" : "post__header--reply"}" style="margin-bottom:2px;">
+            <span class="post__header--name">${name}</span>
+          </div>
 
-    <div class="post__text">${text}</div>
-    `;
+          <div style="font-size:0.7rem; opacity:0.7; margin-bottom:4px;">
+            ${time}
+          </div>
+
+          <div class="post__text">
+            ${text}
+          </div>
+        `;
   } else {
     li.innerHTML = `<div class="post__text">${text}</div>`;
   }
@@ -83,7 +89,7 @@ socket.on("activity", (name) => {
   clearTimeout(activityTimer);
   activityTimer = setTimeout(() => {
     activity.textContent = "";
-  }, 2000);
+  }, 3000);
 });
 
 socket.on("userList", ({ users }) => {
@@ -120,4 +126,20 @@ function showRooms(rooms) {
       }
     });
   }
+}
+
+// theme switch
+function setTheme(themeName) {
+  document.body.className = ""; // clear all themes
+  if (themeName) {
+    document.body.classList.add(themeName);
+  }
+
+  localStorage.setItem("theme", themeName);
+}
+
+const savedTheme = localStorage.getItem("theme");
+
+if (savedTheme) {
+  document.body.classList.add(savedTheme);
 }
