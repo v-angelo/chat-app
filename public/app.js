@@ -1,4 +1,4 @@
-const socket = io("https://chat-app-fm60.onrender.com");
+const socket = io("http://localhost:3500");
 
 const msgInput = document.querySelector("#message");
 const nameInput = document.querySelector("#name");
@@ -44,7 +44,9 @@ msgInput.addEventListener("keypress", () => {
 // listen for message events from the server
 socket.on("message", (data) => {
   activity.textContent = "";
-  const { name, text, time } = data;
+  const { name, text, unformattedTime } = data;
+
+  const time = formatTime(unformattedTime);
 
   const li = document.createElement("li");
   li.className = "post";
@@ -126,6 +128,20 @@ function showRooms(rooms) {
       }
     });
   }
+}
+
+function formatTime(time) {
+  const date = new Date(time);
+
+  if (isNaN(date.getTime())) {
+    return "Invalid time"; // or fallback like ""
+  }
+
+  return new Intl.DateTimeFormat(undefined, {
+    hour: "numeric",
+    minute: "numeric",
+    second: "numeric",
+  }).format(date);
 }
 
 // theme switch
