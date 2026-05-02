@@ -135,10 +135,10 @@ function setTheme(themeName) {
     document.body.classList.add(themeName);
   }
 
-  localStorage.setItem("theme", themeName);
+  sessionStorage.setItem("theme", themeName);
 }
 
-const savedTheme = localStorage.getItem("theme");
+const savedTheme = sessionStorage.getItem("theme");
 
 if (savedTheme) {
   document.body.classList.add(savedTheme);
